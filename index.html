@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html data-scheme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>數位驗證</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/4.0.2/tocas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/4.0.2/tocas.min.css">
+    <style>
+        .center{
+            padding-top: 18%;
+        }
+        .verify_style{
+            font-size: xx-large;
+            color: lightcoral;
+        }
+    </style>
+    <script type="text/javascript">
+        function close_window(){
+            $("#verify_window").removeClass("is-visible");
+        }
+
+        function queryString()
+            {
+                // This function is anonymous, is executed immediately and
+                // the return value is assigned to QueryString!
+                var query_string = {};
+                var query = window.location.search.substring(1);
+                var vars = query.split("&");
+                for (var i = 0; i < vars.length; i++)
+                {
+                    var pair = vars[i].split("=");
+                    if(pair.length <= 1 ){
+                        return undefined;        
+                    }
+                    // If first entry with this name
+                    if (typeof query_string[pair[0]] === "undefined")
+                    {
+                        query_string[pair[0]] = pair[1];
+                        // If second entry with this name
+                    } else if (typeof query_string[pair[0]] === "string")
+                    {
+                        var arr = [query_string[pair[0]], pair[1]];
+                        query_string[pair[0]] = arr;
+                        // If third or later entry with this name
+                    } else
+                    {
+                        query_string[pair[0]].push(pair[1]);
+                    }
+                }
+                return query_string;
+            }
+        $( document ).ready(function() {
+            if(queryString() != undefined){
+                var hashcode = queryString()['hashcode'];
+                if(hashcode != undefined){
+                    fetch('./key.json')
+                        .then( res => {
+                            return res.json();
+                        })
+                        .then( res => {
+                            if( res[hashcode] != undefined ){
+                                setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證皮膚科學會會員</ul><ul>已驗證皮膚科學會會員</ul>")}, 4500 );
+                                setInterval(  function(){ $("#start").html("皮膚科學會會員")}, 3000 );
+                                setInterval(  function(){ $("#name").html(res[hashcode])}, 3000 );
+                                setInterval(  function(){ $("#end").html("已驗證")}, 3000 );
+                                new QRCode(document.getElementById("qrcode"), `https://explore.ipld.io/#/explore/${hashcode}`);
+                            }else{
+                                setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證皮膚科學會會員</ul><ul>非皮膚科學會會員</ul>")}, 4500);
+                                setInterval(  function(){ $("#name").html("驗證失敗")}, 3000 );
+                            }
+                        })
+                        .catch(function(err) {
+                            setInterval(  function(){ $("#content").html("<ul>無法連接區塊鏈</ul>") }, 3000);
+                        });
+                }else{
+                    setInterval(  function(){ $("#content").html("<ul>沒有正確參數</ul>") }, 2000);
+                }
+            }
+            else {
+                setInterval(  function(){ $("#content").html("<ul>沒有參數</ul>")} , 2000 );
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="ts-container">
+        <div class="center">
+            <div id="verify_window" class="ts-modal is-visible">
+                <div class="content">
+                    <div class="ts-content is-dense">
+                        <div class="ts-row">
+                            <div class="column is-fluid">
+                                <div class="ts-header">驗證程序</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ts-divider"></div>
+                    <div class="ts-content" id="content">
+                        <div class="ts-center">
+                            <div class="ts-loading is-large"></div>
+                        </div>
+                    </div>
+                    <div class="ts-divider"></div>
+                    <div class="ts-content is-tertiary">
+                        <div class="ts-wrap is-end-aligned">
+                            <button class="ts-button is-fluid" id="close" onclick="close_window()">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ts-center">
+                <div class="ts-container" id="licence">
+                    <div class="ts-box is-warning is-top-indicated is-bottom-indicated is-left-indicated is-right-indicated">
+                        <div id="start" class="ts-content is-tertiary is-vertically-very-padded is-start-aligned"></div>
+                        <div id="name" class="verify_style ts-content is-tertiary is-vertically-very-padded is-center-aligned"></div>
+                        <div id="end" class="ts-content is-tertiary is-vertically-very-padded is-end-aligned"></div>
+                    </div>
+                </div>
+                <div class="ts-space"></div>
+                <div class="ts-content">可掃描 QRcode</div>
+                <div class="ts-space"></div>
+                <div id="qrcode"></div> 
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
