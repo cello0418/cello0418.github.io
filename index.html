@@ -11,6 +11,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/4.0.2/tocas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/4.0.2/tocas.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         .center{
             padding-top: 18%;
@@ -65,13 +67,20 @@
                         })
                         .then( res => {
                             if( res[hashcode] != undefined ){
-                                setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證皮膚科學會會員</ul><ul>已驗證皮膚科學會會員</ul>")}, 4500 );
+                                
+                                setInterval(  function(){ $("#block_start").hide() }, 3000 );
+                                setInterval(  function(){ $("#block_start_i").show() }, 3000 );
+                                setInterval(  function(){ $("#block_mid").hide() }, 4000 );
+                                setInterval(  function(){ $("#block_mid_i").show() }, 4000 );
+                                setInterval(  function(){ $("#block_end").hide() }, 5000 );
+                                setInterval(  function(){ $("#block_end_i").show() }, 5000 );
+
                                 setInterval(  function(){ $("#start").html("皮膚科學會會員")}, 3000 );
                                 setInterval(  function(){ $("#name").html(res[hashcode])}, 3000 );
                                 setInterval(  function(){ $("#end").html("已驗證")}, 3000 );
                                 new QRCode(document.getElementById("qrcode"), `https://explore.ipld.io/#/explore/${hashcode}`);
                             }else{
-                                setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證皮膚科學會會員</ul><ul>非皮膚科學會會員</ul>")}, 4500);
+                                setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證本人身份</ul><ul>已驗驗證非證書</ul>")}, 4500);
                                 setInterval(  function(){ $("#name").html("驗證失敗")}, 3000 );
                             }
                         })
@@ -102,9 +111,9 @@
                     </div>
                     <div class="ts-divider"></div>
                     <div class="ts-content" id="content">
-                        <div class="ts-center">
-                            <div class="ts-loading is-large"></div>
-                        </div>
+                        <ul><div id="block_start" class='ts-loading' hidden></div><i id="block_start_i"  class='fa fa-check-square fa-2x fa-duotone' aria-hidden='true' style="display:none;"></i> &ensp; 連接區塊鏈</ul>
+                        <ul><div id="block_mid" class='ts-loading'></div><i  id="block_mid_i" class='fa fa-check-square fa-2x' aria-hidden='true' style="display:none"></i> &ensp; 驗證本人身份</ul>
+                        <ul><div id="block_end" class='ts-loading'></div><i id="block_end_i" class='fa fa-check-square fa-2x' aria-hidden='true' style="display:none"></i> &ensp; 已驗驗證證書</ul>
                     </div>
                     <div class="ts-divider"></div>
                     <div class="ts-content is-tertiary">
