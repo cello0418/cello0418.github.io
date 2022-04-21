@@ -24,7 +24,7 @@
     </style>
     <script type="text/javascript">
         function close_window(){
-            $("#verify_window").removeClass("is-visible");
+            $("#verify_window, #data_windows").removeClass("is-visible");
         }
 
         function queryString()
@@ -57,6 +57,16 @@
                 }
                 return query_string;
             }
+        var data_windows_is_open = false;    
+        function windows_function(){
+            if(data_windows_is_open === false){
+                $("#data_windows").addClass("is-visible");
+                data_windows_is_open = true;
+            }else{
+                $("#data_windows").removeClass("is-visible");
+                data_windows_is_open = false;
+            }
+        }    
         $( document ).ready(function() {
             if(queryString() != undefined){
                 var hashcode = queryString()['hashcode'];
@@ -75,10 +85,18 @@
                                 setInterval(  function(){ $("#block_end").hide() }, 5000 );
                                 setInterval(  function(){ $("#block_end_i").show() }, 5000 );
 
-                                setInterval(  function(){ $("#start").html("皮膚科學會會員")}, 3000 );
-                                setInterval(  function(){ $("#name").html(res[hashcode])}, 3000 );
-                                setInterval(  function(){ $("#end").html("已驗證")}, 3000 );
-                                new QRCode(document.getElementById("qrcode"), `https://explore.ipld.io/#/explore/${hashcode}`);
+                                $("#block").html(hashcode);
+                                setInterval(  function(){ $("#start").html("皮膚科學會會員")}, 5100 );
+                                setInterval(  function(){ $("#name").html(res[hashcode])}, 5100 );
+                                setInterval(  function(){ $("#end").html("已驗證")}, 5100 );
+
+                                new QRCode(document.getElementById("qrcode"),
+                                    {
+                                        text: `https://explore.ipld.io/#/explore/${hashcode}`,
+                                        width: 128,
+                                        height: 128
+                                    }
+                                );
                             }else{
                                 setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證本人身份</ul><ul>已驗驗證非證書</ul>")}, 4500);
                                 setInterval(  function(){ $("#name").html("驗證失敗")}, 3000 );
@@ -95,6 +113,8 @@
                 setInterval(  function(){ $("#content").html("<ul>沒有參數</ul>")} , 2000 );
             }
         });
+        
+        
     </script>
 </head>
 <body>
@@ -123,6 +143,49 @@
                     </div>
                 </div>
             </div>
+
+            <div id="data_windows" class="ts-modal is-big">
+                <div class="content">
+                    <div class="ts-content is-dense">
+                        <div class="ts-row">
+                            <div class="column is-fluid">
+                                <div class="ts-header">證書資料</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ts-divider"></div>
+                    <div class="ts-content" id="content">
+                        <div class="ts-box">
+                            <table class="ts-table is-striped">
+                                <thead>
+                                    <tr>
+                                        <th>證書名稱</th>
+                                        <th>發證單位</th>
+                                        <th>發證日期</th>
+                                        <th>證書編碼</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>皮膚科學會會員證書</td>
+                                        <td>皮膚科學會</td>
+                                        <td>2022/05/08</td>
+                                        <td id="block"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <div class="ts-divider"></div>
+                    <div class="ts-content is-tertiary">
+                        <div class="ts-wrap is-end-aligned">
+                            <button class="ts-button is-fluid" id="close" onclick="close_window()">確定</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="ts-center">
                 <div class="ts-container" id="licence">
                     <div class="ts-box is-warning is-top-indicated is-bottom-indicated is-left-indicated is-right-indicated">
@@ -131,6 +194,9 @@
                         <div id="end" class="ts-content is-tertiary is-vertically-very-padded is-end-aligned"></div>
                     </div>
                 </div>
+                
+                <div class="ts-space"></div>
+                <button id ="licence_button" class="ts-button is-outlined" onclick="windows_function()">證書資料</button>
                 <div class="ts-space"></div>
                 <div class="ts-content">可掃描 QRcode</div>
                 <div class="ts-space"></div>
