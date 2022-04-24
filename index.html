@@ -14,15 +14,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
+
         .center{
-            padding-top: 15%;
+            padding: 10%;
+            width: 100%;
+            height:  600%
         }
+        
         .verify_style{
             font-size: xx-large;
             color: lightcoral;
+
         }
         .fa-check{
             color: blue;
+        }
+        #licence{
+            width: 100%;
+            height: 600px;
+            background-size: contain;
+            background-image: url('licence.jpg');
+            background-repeat: no-repeat;
+            position:absolute;
+        }
+        #name{
+            z-index: 4;
+            padding-top: 30%;
+            padding-right: 20%;
+        }
+        #under_data{
+            padding-top: 7%;
+            padding-left: 16%;
+            display:inline-block;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
         }
     </style>
     <script type="text/javascript">
@@ -100,8 +127,8 @@
                                 new QRCode(document.getElementById("qrcode"),
                                     {
                                         text: `https://explore.ipld.io/#/explore/${hashcode}`,
-                                        width: 128,
-                                        height: 128
+                                        width: 60,
+                                        height: 60
                                     }
                                 );
                             }else{
@@ -193,24 +220,28 @@
                 </div>
             </div>
 
-            <div class="ts-center">
-                <div class="ts-container" id="licence">
-                    <div class="ts-box is-warning is-top-indicated is-bottom-indicated is-left-indicated is-right-indicated">
+            <div class="ts-center" id="licence">
+                
+                    <!--<div class="ts-box is-warning is-top-indicated is-bottom-indicated is-left-indicated is-right-indicated">
                         <div id="start" class="ts-content is-tertiary is-vertically-very-padded is-start-aligned"></div>
                         <div id="name" class="verify_style ts-content is-tertiary is-vertically-very-padded is-center-aligned"></div>
                         <div id="end" class="ts-content is-tertiary is-vertically-very-padded is-end-aligned"></div>
+                    </div>-->
+                <div id="name" class="verify_style ts-content is-vertically-very-padded is-center-aligned"></div>
+                <div id="under_data">
+                    <div class="ts-row">
+                        <div class="column">
+                            <button id ="licence_button" class="ts-button is-outlined" onclick="windows_function()">證書資料</button>    
+                        </div>
+                        <div class="column">
+                            <div id="qrcode"></div> 
+                        </div>
+                        
                     </div>
                 </div>
-                
-                <div class="ts-space"></div>
-                <button id ="licence_button" class="ts-button is-outlined" onclick="windows_function()">證書資料</button>
-                <div class="ts-space"></div>
-                <div class="ts-content">可掃描 QRcode</div>
-                <div class="ts-space"></div>
-                <div id="qrcode"></div> 
             </div>
-            
-        </div>
+        </div>    
+        
     </div>
 </body>
 </html>
