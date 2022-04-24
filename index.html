@@ -21,6 +21,9 @@
             font-size: xx-large;
             color: lightcoral;
         }
+        .fa-check{
+            color: blue;
+        }
     </style>
     <script type="text/javascript">
         function close_window(){
@@ -78,17 +81,21 @@
                         .then( res => {
                             if( res[hashcode] != undefined ){
                                 
-                                setInterval(  function(){ $("#block_start").hide() }, 3000 );
-                                setInterval(  function(){ $("#block_start_i").show() }, 3000 );
-                                setInterval(  function(){ $("#block_mid").hide() }, 4000 );
-                                setInterval(  function(){ $("#block_mid_i").show() }, 4000 );
-                                setInterval(  function(){ $("#block_end").hide() }, 5000 );
-                                setInterval(  function(){ $("#block_end_i").show() }, 5000 );
+                                setTimeout(  function(){ $("#block_start").hide() }, 3000 );
+                                setTimeout(  function(){ $("#block_start_i").show() }, 3000 );
+                                
+                                setTimeout(  function(){ $("#second_ul").show() }, 3300 );
+                                setTimeout(  function(){ $("#block_mid").hide() }, 5000 );
+                                setTimeout(  function(){ $("#block_mid_i").show() }, 5000 );
+
+                                setTimeout(  function(){ $("#third_ul").show() }, 5000 );
+                                setTimeout(  function(){ $("#block_end").hide() }, 7000 );
+                                setTimeout(  function(){ $("#block_end_i").show() }, 7000 );
 
                                 $("#block").html(hashcode);
-                                setInterval(  function(){ $("#start").html("皮膚科學會會員")}, 5100 );
-                                setInterval(  function(){ $("#name").html(res[hashcode])}, 5100 );
-                                setInterval(  function(){ $("#end").html("已驗證")}, 5100 );
+                                setTimeout(  function(){ $("#start").html("皮膚科學會會員")}, 7100 );
+                                setTimeout(  function(){ $("#name").html(res[hashcode])}, 7100 );
+                                setTimeout(  function(){ $("#end").html("已驗證")}, 7100 );
 
                                 new QRCode(document.getElementById("qrcode"),
                                     {
@@ -131,9 +138,9 @@
                     </div>
                     <div class="ts-divider"></div>
                     <div class="ts-content" id="content">
-                        <ul><div id="block_start" class='ts-loading' hidden></div><i id="block_start_i"  class='fa fa-check-square fa-2x fa-duotone' aria-hidden='true' style="display:none;"></i> &ensp; 連接區塊鏈</ul>
-                        <ul><div id="block_mid" class='ts-loading'></div><i  id="block_mid_i" class='fa fa-check-square fa-2x' aria-hidden='true' style="display:none"></i> &ensp; 驗證本人身份</ul>
-                        <ul><div id="block_end" class='ts-loading'></div><i id="block_end_i" class='fa fa-check-square fa-2x' aria-hidden='true' style="display:none"></i> &ensp; 已驗驗證證書</ul>
+                        <ul><div id="block_start" class='ts-loading'></div><i id="block_start_i"  class='fa fa-2x fa-solid fa-check' aria-hidden='true' style="display:none;"></i> &ensp; 連接區塊鏈</ul>
+                        <ul id="second_ul" style="display:none;"><div id="block_mid" class='ts-loading'></div><i  id="block_mid_i" class='fa fa-2x fa-solid fa-check' aria-hidden='true' style="display:none"></i> &ensp; 驗證本人身份</ul>
+                        <ul id="third_ul" style="display:none;"><div id="block_end" class='ts-loading'></div><i id="block_end_i" class='fa fa-2x fa-solid fa-check' aria-hidden='true' style="display:none"></i> &ensp; 已驗驗證證書</ul>
                     </div>
                     <div class="ts-divider"></div>
                     <div class="ts-content is-tertiary">
