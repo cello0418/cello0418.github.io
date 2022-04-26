@@ -26,7 +26,7 @@
             color: lightcoral;
 
         }
-        .fa-check{
+        .fa-circle-check{
             color: blue;
         }
         #licence{
@@ -43,7 +43,7 @@
             padding-right: 20%;
         }
         #under_data{
-            padding-top: 7%;
+            padding-top: 5%;
             padding-left: 16%;
             display:inline-block;
         }
@@ -127,8 +127,8 @@
                                 new QRCode(document.getElementById("qrcode"),
                                     {
                                         text: `https://explore.ipld.io/#/explore/${hashcode}`,
-                                        width: 60,
-                                        height: 60
+                                        width: 80,
+                                        height: 80
                                     }
                                 );
                             }else{
@@ -165,9 +165,9 @@
                     </div>
                     <div class="ts-divider"></div>
                     <div class="ts-content" id="content">
-                        <ul><div id="block_start" class='ts-loading'></div><i id="block_start_i"  class='fa fa-2x fa-solid fa-check' aria-hidden='true' style="display:none;"></i> &ensp; 連接區塊鏈</ul>
-                        <ul id="second_ul" style="display:none;"><div id="block_mid" class='ts-loading'></div><i  id="block_mid_i" class='fa fa-2x fa-solid fa-check' aria-hidden='true' style="display:none"></i> &ensp; 驗證本人身份</ul>
-                        <ul id="third_ul" style="display:none;"><div id="block_end" class='ts-loading'></div><i id="block_end_i" class='fa fa-2x fa-solid fa-check' aria-hidden='true' style="display:none"></i> &ensp; 已驗驗證證書</ul>
+                        <ul><div id="block_start" class='ts-loading'></div><i id="block_start_i"  class='fa fa-2x fa-solid fa-circle-check' aria-hidden='true' style="display:none;"></i> &ensp; 連接區塊鏈</ul>
+                        <ul id="second_ul" style="display:none;"><div id="block_mid" class='ts-loading'></div><i  id="block_mid_i" class='fa fa-2x fa-solid fa-circle-check' aria-hidden='true' style="display:none"></i> &ensp; 驗證本人身份</ul>
+                        <ul id="third_ul" style="display:none;"><div id="block_end" class='ts-loading'></div><i id="block_end_i" class='fa fa-2x fa-solid fa-circle-check' aria-hidden='true' style="display:none"></i> &ensp; 已驗驗證證書</ul>
                     </div>
                     <div class="ts-divider"></div>
                     <div class="ts-content is-tertiary">
