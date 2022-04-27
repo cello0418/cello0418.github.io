@@ -16,9 +16,9 @@
     <style>
 
         .center{
-            padding: 10%;
+            padding: 5%;
             min-width:1180px; 
-            height:  600%
+            height:  600px;
         }
         
         .verify_style{
@@ -39,17 +39,21 @@
         }
         #name{
             z-index: 4;
-            padding-top: 30%;
+            padding-top: 27%;
             padding-right: 20%;
         }
         #under_data{
-            padding-top: 5%;
-            padding-left: 16%;
+            padding-top:7%;
+            padding-left: 24%;
             display:inline-block;
         }
         img {
             max-width: 100%;
             height: auto;
+        }
+        .ts-button.is-outlined {
+            background-color: blue;
+            color: white;
         }
     </style>
     <script type="text/javascript">
@@ -183,7 +187,7 @@
                     <div class="ts-content is-dense">
                         <div class="ts-row">
                             <div class="column is-fluid">
-                                <div class="ts-header">證書資料</div>
+                                <div class="ts-header">Cert Info</div>
                             </div>
                         </div>
                     </div>
@@ -231,7 +235,9 @@
                 <div id="under_data">
                     <div class="ts-row">
                         <div class="column">
-                            <button id ="licence_button" class="ts-button is-outlined" onclick="windows_function()">證書資料</button>    
+                            <div class="ts-center">
+                                <button id ="licence_button" class="ts-button is-outlined" onclick="windows_function()">Cert Info</button>    
+                            </div>
                         </div>
                         <div class="column">
                             <div id="qrcode"></div> 
