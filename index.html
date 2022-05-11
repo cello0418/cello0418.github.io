@@ -34,7 +34,7 @@
             width: 100%;
             height: 600px;
             background-size: contain;
-            background-image: url('licence.jpg');
+            background-image: url('2022TDACAttendance.jpg');
             background-repeat: no-repeat;
             position:absolute;
         }
@@ -75,11 +75,22 @@
             text-decoration: none;
             vertical-align: middle;
         }
-        #play {
-
-        }
     </style>
     <script type="text/javascript">
+
+        function background(index){
+            var images = {
+                "AMWC Asia TDAC 2022-Speaker":"2022TDACappreciaation.pdf",
+                "AMWC Asia TDAC 2022-Attendance":"2022TDACAttendance.jpg"
+            }
+            return images[index]
+        }
+
+        function load_data(index){
+            var data = {"AMWCASIATDAC": {"data": "AMWCAsiaTDAC2022.json", "name": "皮膚科春季會 AMWC Asia-TDAC 2022", "dep": "皮膚科學會", "date": "2022/05/08", "start": "皮膚科學會會員"}}
+            return data[index]
+        }
+
         function close_window(){
             $("#verify_window, #data_windows").removeClass("is-visible");
         }
@@ -125,16 +136,23 @@
             }
         }    
         $( document ).ready(function() {
+            
+
             if(queryString() != undefined){
                 var hashcode = queryString()['hashcode'];
-                if(hashcode != undefined){
-                    fetch('./key.json')
+                var object_id = queryString()['id'];
+                
+                if(hashcode != undefined && object_id != undefined && load_data(object_id) != undefined){
+                    var conf_data = load_data(object_id);
+                    fetch(conf_data['data'])
                         .then( res => {
                             return res.json();
                         })
                         .then( res => {
                             if( res[hashcode] != undefined ){
-                                
+                                console.log(res[hashcode]['type']);
+                                $('#licence').css('background-image', 'url(' +  background( res[hashcode]['type'] )+ ')');
+
                                 setTimeout(  function(){ $("#block_start").hide() }, 3000 );
                                 setTimeout(  function(){ $("#block_start_i").show() }, 3000 );
                                 
@@ -147,13 +165,17 @@
                                 setTimeout(  function(){ $("#block_end_i").show() }, 7000 );
 
                                 $("#block").html(hashcode);
-                                setTimeout(  function(){ $("#start").html("皮膚科學會會員")}, 7100 );
-                                setTimeout(  function(){ $("#name").html(res[hashcode])}, 7100 );
+                                setTimeout(  function(){ $("#start").html(conf_data['start'])}, 7100 );
+                                setTimeout(  function(){ $("#name").html(res[hashcode]['name'])}, 7100 );
                                 setTimeout(  function(){ $("#end").html("已驗證")}, 7100 );
+
+                                setTimeout(  function(){ $("#li_name").html(conf_data['name'])}, 7100 );
+                                setTimeout(  function(){ $("#li_dep").html(conf_data['dep'])}, 7100 );
+                                setTimeout(  function(){ $("#li_date").html(conf_data['date'])}, 7100 );
 
                                 new QRCode(document.getElementById("qrcode"),
                                     {
-                                        text: `https://cello0418.github.io/?hashcode=${hashcode}`,
+                                        text: `https://cello0418.github.io/?id=${object_id}&hashcode=${hashcode}`,
                                         width: 80,
                                         height: 80
                                     }
@@ -174,8 +196,6 @@
                 setInterval(  function(){ $("#content").html("<ul>沒有參數</ul>")} , 2000 );
             }
         });
-        
-        
     </script>
 </head>
 <body>
@@ -228,9 +248,9 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>皮膚科春季會 AMWC Asia-TDAC 2022</td>
-                                        <td>皮膚科學會</td>
-                                        <td>2022/05/08</td>
+                                        <td id="li_name"></td>
+                                        <td id="li_dep"></td>
+                                        <td id="li_date"></td>
                                         <td id="block"></td>
                                     </tr>
                                 </tbody>
@@ -249,11 +269,11 @@
 
             <div class="ts-center" id="licence">
                 
-                    <!--<div class="ts-box is-warning is-top-indicated is-bottom-indicated is-left-indicated is-right-indicated">
-                        <div id="start" class="ts-content is-tertiary is-vertically-very-padded is-start-aligned"></div>
-                        <div id="name" class="verify_style ts-content is-tertiary is-vertically-very-padded is-center-aligned"></div>
-                        <div id="end" class="ts-content is-tertiary is-vertically-very-padded is-end-aligned"></div>
-                    </div>-->
+                <!-- <div class="ts-box is-warning is-top-indicated is-bottom-indicated is-left-indicated is-right-indicated">
+                    <div id="start" class="ts-content is-tertiary is-vertically-very-padded is-start-aligned"></div>
+                    <div id="name" class="verify_style ts-content is-tertiary is-vertically-very-padded is-center-aligned"></div>
+                    <div id="end" class="ts-content is-tertiary is-vertically-very-padded is-end-aligned"></div>
+                </div>-->
                 <div id="name" class="verify_style ts-content is-vertically-very-padded is-center-aligned"></div>
                 <div id="under_data">
                     <div class="ts-row">
