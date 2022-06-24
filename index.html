@@ -12,191 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/4.0.2/tocas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas-ui/4.0.2/tocas.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <style>
-
-        .center{
-            padding-top: 5%;
-            padding-left: 15%;
-            min-width: 1180px; 
-            height:  600px;
-        }
-        
-        .verify_style{
-            font-size: xx-large;
-            color: lightcoral;
-
-        }
-        .fa-circle-check{
-            color: #57a5f2;
-        }
-        #licence{
-            width: 100%;
-            height: 600px;
-            background-size: contain;
-            background-image: url('2022TDACAttendance.jpg');
-            background-repeat: no-repeat;
-            position:absolute;
-        }
-        #name{
-            z-index: 4;
-            padding-top: 27%;
-            padding-right: 29%;
-        }
-        #under_data{
-            padding-top:7%;
-            padding-left: 25%;
-            display:inline-block;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        .ts-button.is-outlined {
-            background-color: #57a5f2;
-            color: white;
-            width: 84px;
-            border: 2px solid
-        }
-        .down {
-            padding-top: 22%;
-        }
-        .ts-button {
-            align-items: center;
-            border-radius: 0.4rem;
-            display: inline-flex;
-            font-size: var(--ts-font-size-14px);
-            font-weight: 500;
-            justify-content: center;
-            line-height: 1.5;
-            min-width: 75px;
-            padding: 0.1rem 0.25rem;
-            text-align: center;
-            text-decoration: none;
-            vertical-align: middle;
-        }
-    </style>
-    <script type="text/javascript">
-
-        function background(index){
-            var images = {
-                "AMWC Asia TDAC 2022-Speaker":"2022TDACappreciaation.jpg",
-                "AMWC Asia TDAC 2022-Attendance":"2022TDACAttendance.jpg"
-            }
-            return images[index]
-        }
-
-        function load_data(index){
-            var data = {"AMWCASIATDAC": {"data": "AMWCAsiaTDAC2022.json", "name": "皮膚科春季會 AMWC Asia-TDAC 2022", "dep": "皮膚科學會", "date": "2022/05/08", "start": "皮膚科學會會員"}}
-            return data[index]
-        }
-
-        function close_window(){
-            $("#verify_window, #data_windows").removeClass("is-visible");
-        }
-
-        function queryString()
-            {
-                // This function is anonymous, is executed immediately and
-                // the return value is assigned to QueryString!
-                var query_string = {};
-                var query = window.location.search.substring(1);
-                var vars = query.split("&");
-                for (var i = 0; i < vars.length; i++)
-                {
-                    var pair = vars[i].split("=");
-                    if(pair.length <= 1 ){
-                        return undefined;        
-                    }
-                    // If first entry with this name
-                    if (typeof query_string[pair[0]] === "undefined")
-                    {
-                        query_string[pair[0]] = pair[1];
-                        // If second entry with this name
-                    } else if (typeof query_string[pair[0]] === "string")
-                    {
-                        var arr = [query_string[pair[0]], pair[1]];
-                        query_string[pair[0]] = arr;
-                        // If third or later entry with this name
-                    } else
-                    {
-                        query_string[pair[0]].push(pair[1]);
-                    }
-                }
-                return query_string;
-            }
-        var data_windows_is_open = false;    
-        function windows_function(){
-            if(data_windows_is_open === false){
-                $("#data_windows").addClass("is-visible");
-                data_windows_is_open = true;
-            }else{
-                $("#data_windows").removeClass("is-visible");
-                data_windows_is_open = false;
-            }
-        }    
-        $( document ).ready(function() {
-            
-
-            if(queryString() != undefined){
-                var hashcode = queryString()['hashcode'];
-                var object_id = queryString()['id'];
-                
-                if(hashcode != undefined && object_id != undefined && load_data(object_id) != undefined){
-                    var conf_data = load_data(object_id);
-                    fetch(conf_data['data'])
-                        .then( res => {
-                            return res.json();
-                        })
-                        .then( res => {
-                            if( res[hashcode] != undefined ){
-                                console.log(res[hashcode]['type']);
-                                $('#licence').css('background-image', 'url(' +  background( res[hashcode]['type'] )+ ')');
-
-                                setTimeout(  function(){ $("#block_start").hide() }, 3000 );
-                                setTimeout(  function(){ $("#block_start_i").show() }, 3000 );
-                                
-                                setTimeout(  function(){ $("#second_ul").show() }, 3300 );
-                                setTimeout(  function(){ $("#block_mid").hide() }, 5000 );
-                                setTimeout(  function(){ $("#block_mid_i").show() }, 5000 );
-
-                                setTimeout(  function(){ $("#third_ul").show() }, 5000 );
-                                setTimeout(  function(){ $("#block_end").hide() }, 7000 );
-                                setTimeout(  function(){ $("#block_end_i").show() }, 7000 );
-
-                                $("#block").html(hashcode);
-                                setTimeout(  function(){ $("#start").html(conf_data['start'])}, 7100 );
-                                setTimeout(  function(){ $("#name").html(res[hashcode]['name'])}, 7100 );
-                                setTimeout(  function(){ $("#end").html("已驗證")}, 7100 );
-
-                                setTimeout(  function(){ $("#li_name").html(conf_data['name'])}, 7100 );
-                                setTimeout(  function(){ $("#li_dep").html(conf_data['dep'])}, 7100 );
-                                setTimeout(  function(){ $("#li_date").html(conf_data['date'])}, 7100 );
-
-                                new QRCode(document.getElementById("qrcode"),
-                                    {
-                                        text: `https://www.mycertification.co/?id=${object_id}&hashcode=${hashcode}`,
-                                        width: 80,
-                                        height: 80
-                                    }
-                                );
-                            }else{
-                                setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證本人身份</ul><ul>已驗驗證非證書</ul>")}, 4500);
-                                setInterval(  function(){ $("#name").html("驗證失敗")}, 3000 );
-                            }
-                        })
-                        .catch(function(err) {
-                            setInterval(  function(){ $("#content").html("<ul>無法連接區塊鏈</ul>") }, 3000);
-                        });
-                }else{
-                    setInterval(  function(){ $("#content").html("<ul>沒有正確參數</ul>") }, 2000);
-                }
-            }
-            else {
-                setInterval(  function(){ $("#content").html("<ul>沒有參數</ul>")} , 2000 );
-            }
-        });
-    </script>
+    <script src="js/index.js" type="application/javascript"></script>
 </head>
 <body>
     <div class="ts-container">
@@ -219,7 +35,7 @@
                     <div class="ts-divider"></div>
                     <div class="ts-content is-tertiary">
                         <div class="ts-wrap is-end-aligned">
-                            <button class="ts-button is-fluid" id="close" onclick="close_window()">確定</button>
+                            <button class="ts-button is-fluid" onclick="close_window()">確定</button>
                         </div>
                     </div>
                 </div>
@@ -235,7 +51,7 @@
                         </div>
                     </div>
                     <div class="ts-divider"></div>
-                    <div class="ts-content" id="content">
+                    <div class="ts-content">
                         <div class="ts-box">
                             <table class="ts-table is-striped">
                                 <thead>
@@ -261,7 +77,7 @@
                     <div class="ts-divider"></div>
                     <div class="ts-content is-tertiary">
                         <div class="ts-wrap is-end-aligned">
-                            <button class="ts-button is-fluid" id="close" onclick="close_window()">確定</button>
+                            <button class="ts-button is-fluid" onclick="close_window()">確定</button>
                         </div>
                     </div>
                 </div>
@@ -279,7 +95,7 @@
                     <div class="ts-row">
                         <div class="column">
                             <div class="ts-center">
-                                <div class="down"></div>
+
                                 <img id ="licence_button" onclick="windows_function()" src='button.png' style="width: 80px;" />
                             </div>
                         </div>
