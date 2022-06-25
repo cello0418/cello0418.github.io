@@ -33,6 +33,7 @@ function close_window(){
     $("#verify_window, #data_windows").removeClass("is-visible");
 }
 
+
 function queryString()
 {
     // This function is anonymous, is executed immediately and
@@ -63,6 +64,7 @@ function queryString()
     }
     return query_string;
 }
+
 var data_windows_is_open = false;
 function windows_function(){
     if(data_windows_is_open === false){
@@ -79,6 +81,12 @@ $( document ).ready(function() {
     if(queryString() !== undefined){
         var hashcode = queryString()['hashcode'];
         var object_id = queryString()['id'];
+
+        var hidden = queryString()['hidden']
+        if(hidden){
+            $("#under_data").css("visibility", "hidden")
+        }
+
         load_css(object_id)
 
         if(hashcode !== undefined && object_id !== undefined && load_data(object_id) !== undefined){
@@ -91,7 +99,9 @@ $( document ).ready(function() {
                     if( res[hashcode] !== undefined ){
 
                         $('#licence').css('background-image', 'url(./img/' +  background( res[hashcode]['type'] )+ ')');
-
+                        $("#licence_button").hover(function (){
+                            $(this).css('cursor', 'pointer')
+                        })
                         setTimeout(  function(){ $("#block_start").hide() }, 3000 );
                         setTimeout(  function(){ $("#block_start_i").show() }, 3000 );
 
@@ -141,4 +151,10 @@ $( document ).ready(function() {
     else {
         setInterval(  function(){ $("#content").html("<ul>沒有參數</ul>")} , 2000 );
     }
+
+    $('#click_new_window').click(function (){
+        let url = window.location.href
+        url = `${url}&hidden=true`
+        window.open(url)
+    })
 });
