@@ -18,6 +18,7 @@ function background(index){
         "AMWC Asia TDAC 2022-Speaker":"2022TDACappreciaation.jpg",
         "AMWC Asia TDAC 2022-Attendance":"2022TDACAttendance.jpg",
         "Merz-MMTP2022-Attendance": "MMTP2022Attendance.jpg",
+        "Merz-MMTP2022-Attendance814": "MMTP2022Attendance814.jpg",
         "Merz-MMTP2022-Speaker": "MMTP2022Appreciation.jpg"
     }
     return images[index]
