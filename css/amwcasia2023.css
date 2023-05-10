@@ -1,0 +1,62 @@
+
+.center{
+    padding-top: 5%;
+    padding-left: 15%;
+    min-width: 1180px;
+    height:  600px;
+}
+
+.verify_style{
+    font-size: xx-large;
+    color: white;
+
+}
+.fa-circle-check{
+    color: #57a5f2;
+}
+#licence{
+    width: 100%;
+    height: 600px;
+    background-size: contain;
+    background-image: url('../img/2022TDACAttendance.jpg');
+    background-repeat: no-repeat;
+    position:absolute;
+}
+#name{
+    z-index: 4;
+    padding-top: 24%;
+    padding-right: 33%;
+    color: black;
+}
+#under_data{
+    padding-top:13%;
+    padding-left: 0%;
+    display:inline-block;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.ts-button.is-outlined {
+    background-color: #57a5f2;
+    color: white;
+    width: 84px;
+    border: 2px solid
+}
+.down {
+    padding-top: 22%;
+}
+.ts-button {
+    align-items: center;
+    border-radius: 0.4rem;
+    display: inline-flex;
+    font-size: var(--ts-font-size-14px);
+    font-weight: 500;
+    justify-content: center;
+    line-height: 1.5;
+    min-width: 75px;
+    padding: 0.1rem 0.25rem;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+}

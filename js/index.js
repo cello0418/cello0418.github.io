@@ -7,6 +7,8 @@ function load_css(_id){
         $('head').append(`<link rel="stylesheet" href="css/amwcasiatac.css">`)
     }else if(_id === "MMTP2022"){
         $('head').append(`<link rel="stylesheet" href="css/mmtp2022.css">`)
+    }else if(_id=='AMWCASIA2023'){
+        $('head').append(`<link rel="stylesheet" href="css/amwcasia2023.css">`)
     }
 
 }
@@ -19,14 +21,18 @@ function background(index){
         "AMWC Asia TDAC 2022-Attendance":"2022TDACAttendance.jpg",
         "Merz-MMTP2022-Attendance": "MMTP2022Attendance.jpg",
         "Merz-MMTP2022-Attendance814": "MMTP2022Attendance814.jpg",
-        "Merz-MMTP2022-Speaker": "MMTP2022Appreciation.jpg"
+        "Merz-MMTP2022-Speaker": "MMTP2022Appreciation.jpg",
+        "AMWC-Asia-2023-participants": "AMWCAsia2023-Certificate.jpg",
+        "AMWCAsia2023-Certificate-Speaker":"AMWCAsia2023-Certificate-Speaker.jpg"
     }
     return images[index]
 }
 
 function load_data(index){
     var data = {"AMWCASIATDAC": {"data": "AMWCAsiaTDAC2022.json", "name": "皮膚科春季會 AMWC Asia-TDAC 2022", "dep": "皮膚科學會", "date": "2022/05/08", "start": "皮膚科學會會員"},
-                "MMTP2022": {"data": "Merz-MMTP2022.json", "name": "MMTP - Radiesse", "dep": "Merz Taiwan","start": "MMTP 會員"}}
+                "MMTP2022": {"data": "Merz-MMTP2022.json", "name": "MMTP - Radiesse", "dep": "Merz Taiwan","start": "MMTP 會員"},
+                "AMWCASIA2023":{"data":"AMWCAsia2023.json", "name": "AMWCAsia 2023", "dep":"AMWCA", "date": "2023/05/05","AMWCAsia": "AMWCAsia member"}
+            }
     return data[index]
 }
 
