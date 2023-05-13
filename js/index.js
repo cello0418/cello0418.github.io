@@ -123,7 +123,7 @@ $( document ).ready(function() {
                         $("#block").html(hashcode);
                         setTimeout(  function(){ $("#start").html(conf_data['start'])}, 7100 );
                         setTimeout(  function(){ $("#name").html(res[hashcode]['name'])}, 7100 );
-                        setTimeout(  function(){ $("#end").html("已驗證")}, 7100 );
+                        setTimeout(  function(){ $("#end").html("已驗證 Verified")}, 7100 );
 
                         setTimeout(  function(){ $("#li_name").html(conf_data['name'])}, 7100 );
                         setTimeout(  function(){ $("#li_dep").html(conf_data['dep'])}, 7100 );
@@ -144,19 +144,19 @@ $( document ).ready(function() {
                             }
                         );
                     }else{
-                        setInterval(  function(){ $("#content").html("<ul>連接區塊鏈</ul><ul>驗證本人身份</ul><ul>已驗驗證非證書</ul>")}, 4500);
+                        setInterval(  function(){ $("#content").html("<ul>連接區塊鏈 Blockchain Connected</ul><ul>驗證本人身份 Identity Autherticated</ul><ul>已驗驗證證書 Certificate Verified</ul>")}, 4500);
                         setInterval(  function(){ $("#name").html("驗證失敗")}, 3000 );
                     }
                 })
                 .catch(function(err) {
-                    setInterval(  function(){ $("#content").html("<ul>無法連接區塊鏈</ul>") }, 3000);
+                    setInterval(  function(){ $("#content").html("<ul>無法連接區塊鏈 Cannot Connect Blockchain</ul>") }, 3000);
                 });
         }else{
-            setInterval(  function(){ $("#content").html("<ul>沒有正確參數</ul>") }, 2000);
+            setInterval(  function(){ $("#content").html("<ul>沒有正確參數 Incorrect Parameters</ul>") }, 2000);
         }
     }
     else {
-        setInterval(  function(){ $("#content").html("<ul>沒有參數</ul>")} , 2000 );
+        setInterval(  function(){ $("#content").html("<ul>沒有參數 No Parameter</ul>")} , 2000 );
     }
 
     $('#click_new_window').click(function (){
