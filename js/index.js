@@ -23,7 +23,7 @@ function background(index){
         "Merz-MMTP2022-Attendance814": "MMTP2022Attendance814.jpg",
         "Merz-MMTP2022-Speaker": "MMTP2022Appreciation.jpg",
         "AMWC-Asia-2023-participants": "AMWCAsia2023-Certificate.jpg",
-        "AMWCAsia2023-Certificate-Speaker":"AMWCAsia2023-Certificate-Speaker.jpg"
+        "AMWC-Asia-2023-speakers":"AMWCAsia2023-Certificate-Speaker.jpg"
     }
     return images[index]
 }
