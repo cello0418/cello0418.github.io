@@ -144,7 +144,7 @@ $( document ).ready(function() {
                             }
                         );
                     }else{
-                        setInterval(  function(){ $("#content").html("<ul>連接區塊鏈 Blockchain Connected</ul><ul>驗證本人身份 Identity Autherticated</ul><ul>已驗驗證證書 Certificate Validated</ul>")}, 4500);
+                        setInterval(  function(){ $("#content").html("<ul>連接區塊鏈 Blockchain Connected</ul><ul>驗證本人身份 Identity Authenticated</ul><ul>已驗驗證證書 Certificate Validated</ul>")}, 4500);
                         setInterval(  function(){ $("#name").html("驗證失敗")}, 3000 );
                     }
                 })
